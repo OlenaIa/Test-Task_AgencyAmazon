@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/OlenaIa.github.io/Test-Task_AgencyAmazon/static/css/main.7acaea2f.css",
+    "main.js": "/OlenaIa.github.io/Test-Task_AgencyAmazon/static/js/main.07d3183d.js",
+    "index.html": "/OlenaIa.github.io/Test-Task_AgencyAmazon/index.html",
+    "main.7acaea2f.css.map": "/OlenaIa.github.io/Test-Task_AgencyAmazon/static/css/main.7acaea2f.css.map",
+    "main.07d3183d.js.map": "/OlenaIa.github.io/Test-Task_AgencyAmazon/static/js/main.07d3183d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7acaea2f.css",
+    "static/js/main.07d3183d.js"
+  ]
+}
