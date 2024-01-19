@@ -1,41 +1,36 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useSelector } from 'react-redux';
+import { selectSelectedAccount } from '../redux/accounts/accountsSelector';
 
 const Profiles = () => {
-    return (
-        <div class='container'>
-            <h2>Profiles</h2>
+    const profilesByAccountId = useSelector(selectSelectedAccount);
+    const { accountId } = profilesByAccountId[0];
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
+    return (
+        <div className='container'>
+            <h2>Profiles for accountId: {accountId}</h2>
+            <table className="table table-striped table-bordered">
+                <thead className='table-dark'>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ProfileId</th>
+                        <th scope="col">Country</th>
+                        <th scope="col">Marketplace</th>
+                    </tr>
+                </thead>
+                <tbody className="table-group-divider">
+                    {profilesByAccountId?.map((item, index) =>
+                        <tr key={item.id}>
+                            <th scope="row">{index + 1}</th>
+                            <td>{item.id}</td>
+                            <td>{item.country}</td>
+                            <td>{item.marketplace}</td>
+                        </tr>)}
+
+                </tbody>
             </table>
-            </div>
-)
+        </div>
+    )
 };
 
 export default Profiles;

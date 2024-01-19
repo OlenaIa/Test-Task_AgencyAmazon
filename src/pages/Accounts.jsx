@@ -2,7 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAccounts } from '../redux/accounts/accountsSelector';
 import { useEffect } from 'react';
-import { getAccountsThunk } from '../redux/accounts/operationAccounts';
+import { getAccountsThunk, getProfilesByAccountIdThank } from '../redux/accounts/operationAccounts';
+import { NavLink } from 'react-router-dom';
 
 const Accounts = () => {
     const accounts = useSelector(selectAccounts);
@@ -11,6 +12,11 @@ const Accounts = () => {
     useEffect(() => {
         dispatch(getAccountsThunk())
     }, [dispatch]);
+
+    const onClickAccountId = (accountId) => {
+        console.log('click onClickAccountId', accountId);
+dispatch(getProfilesByAccountIdThank(accountId))
+    };
 
     return (
         <div className='container'>
@@ -30,11 +36,10 @@ const Accounts = () => {
                     {accounts?.map((acc, index) =>
                         <tr key={acc.accountId}>
                             <th scope="row">{index + 1}</th>
-                            <td>{acc.accountId}</td>
+                            <td onClick={() => onClickAccountId(acc.accountId)}><NavLink className="btn btn-secondary" role="button" to="/profiles">{acc.accountId}</NavLink></td>
                             <td>{acc.email}</td>
                             <td>{acc.authToken}</td>
                             <td>{acc.creationDate}</td>
-
                         </tr>)}
 
                 </tbody>
