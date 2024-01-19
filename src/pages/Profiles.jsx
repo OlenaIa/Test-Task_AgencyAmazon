@@ -1,14 +1,23 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectSelectedAccount } from '../redux/accounts/accountsSelector';
+import { nanoid } from 'nanoid';
+import { NavLink } from 'react-router-dom';
+import { profileIdSet } from '../redux/chosenIdSlice';
 
 const Profiles = () => {
     const profilesByAccountId = useSelector(selectSelectedAccount);
-    const { accountId } = profilesByAccountId[0];
+    // const { accountId } = profilesByAccountId[0];
+    const dispatch = useDispatch();
+
+    const onClickProfileId = (profileId) => {
+        console.log('click onClickProfileId', profileId);
+dispatch(profileIdSet(profileId))
+    };
 
     return (
         <div className='container'>
-            <h2>Profiles for accountId: {accountId}</h2>
+            <h2>Profiles for accountId: {}</h2>
             <table className="table table-striped table-bordered">
                 <thead className='table-dark'>
                     <tr>
@@ -20,9 +29,9 @@ const Profiles = () => {
                 </thead>
                 <tbody className="table-group-divider">
                     {profilesByAccountId?.map((item, index) =>
-                        <tr key={item.id}>
+                        <tr key={nanoid(3)}>
                             <th scope="row">{index + 1}</th>
-                            <td>{item.id}</td>
+                            <td onClick={() => onClickProfileId(item.profileId)}><NavLink className="btn btn-secondary" role="button" to="/campaigns">{item.profileId}</NavLink></td>
                             <td>{item.country}</td>
                             <td>{item.marketplace}</td>
                         </tr>)}

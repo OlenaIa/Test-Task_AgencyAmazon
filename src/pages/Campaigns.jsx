@@ -1,42 +1,42 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { CAMPAIGNS } from '../data';
+import { nanoid } from 'nanoid';
+import { useSelector } from 'react-redux';
+import { selectProfileId } from '../redux/chosenIdSlice';
 
 
 const Campaigns = () => {
-    return (
-        <div class='container'>
-            <h2>Campaigns</h2>
+    const chosenProfileId = useSelector(selectProfileId);
+    console.log('chosenProfileId on CampaignsPage', chosenProfileId);
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
+    return (
+        <div className='container'>
+            <h2>Campaigns for ProfileId: </h2>
+            <table className="table table-striped table-bordered">
+                <thead className='table-dark'>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">CampaignId</th>
+                        <th scope="col">Clicks</th>
+                        <th scope="col">Cost, $</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody className="table-group-divider">
+                    {CAMPAIGNS?.map((item, index) =>
+                        <tr key={nanoid(3)}>
+                            <th scope="row">{index + 1}</th>
+                            <td>{item.campaignId}</td>
+                            <td>{item.clicks}</td>
+                            <td>{item.cost}</td>
+                            <td>{item.date}</td>
+
+                        </tr>)}
+
+                </tbody>
             </table>
-            </div>
-)
+        </div>
+    )
 };
 
 export default Campaigns;
