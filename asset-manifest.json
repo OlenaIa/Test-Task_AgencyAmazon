@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/OlenaIa.github.io/Test-Task_AgencyAmazon/static/css/main.5ce3e43a.css",
-    "main.js": "/OlenaIa.github.io/Test-Task_AgencyAmazon/static/js/main.a742647a.js",
+    "main.js": "/OlenaIa.github.io/Test-Task_AgencyAmazon/static/js/main.88e9d602.js",
     "static/js/129.e951c561.chunk.js": "/OlenaIa.github.io/Test-Task_AgencyAmazon/static/js/129.e951c561.chunk.js",
-    "static/js/502.6ba94b05.chunk.js": "/OlenaIa.github.io/Test-Task_AgencyAmazon/static/js/502.6ba94b05.chunk.js",
-    "static/js/855.f7837277.chunk.js": "/OlenaIa.github.io/Test-Task_AgencyAmazon/static/js/855.f7837277.chunk.js",
+    "static/js/502.bb91f993.chunk.js": "/OlenaIa.github.io/Test-Task_AgencyAmazon/static/js/502.bb91f993.chunk.js",
+    "static/js/601.0c44a68e.chunk.js": "/OlenaIa.github.io/Test-Task_AgencyAmazon/static/js/601.0c44a68e.chunk.js",
     "index.html": "/OlenaIa.github.io/Test-Task_AgencyAmazon/index.html",
     "main.5ce3e43a.css.map": "/OlenaIa.github.io/Test-Task_AgencyAmazon/static/css/main.5ce3e43a.css.map",
-    "main.a742647a.js.map": "/OlenaIa.github.io/Test-Task_AgencyAmazon/static/js/main.a742647a.js.map",
+    "main.88e9d602.js.map": "/OlenaIa.github.io/Test-Task_AgencyAmazon/static/js/main.88e9d602.js.map",
     "129.e951c561.chunk.js.map": "/OlenaIa.github.io/Test-Task_AgencyAmazon/static/js/129.e951c561.chunk.js.map",
-    "502.6ba94b05.chunk.js.map": "/OlenaIa.github.io/Test-Task_AgencyAmazon/static/js/502.6ba94b05.chunk.js.map",
-    "855.f7837277.chunk.js.map": "/OlenaIa.github.io/Test-Task_AgencyAmazon/static/js/855.f7837277.chunk.js.map"
+    "502.bb91f993.chunk.js.map": "/OlenaIa.github.io/Test-Task_AgencyAmazon/static/js/502.bb91f993.chunk.js.map",
+    "601.0c44a68e.chunk.js.map": "/OlenaIa.github.io/Test-Task_AgencyAmazon/static/js/601.0c44a68e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.5ce3e43a.css",
-    "static/js/main.a742647a.js"
+    "static/js/main.88e9d602.js"
   ]
 }
