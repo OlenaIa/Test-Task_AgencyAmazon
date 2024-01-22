@@ -3,15 +3,21 @@ import { CAMPAIGNS } from '../data';
 import { nanoid } from 'nanoid';
 import { useSelector } from 'react-redux';
 import { selectProfileId } from '../redux/chosenIdSlice';
+import { useEffect, useState } from 'react';
 
 
 const Campaigns = () => {
+    const [chosenCampaigns, setChosenCampaigns] = useState([]);
     const chosenProfileId = useSelector(selectProfileId);
-    console.log('chosenProfileId on CampaignsPage', chosenProfileId);
+
+    useEffect(() => {
+        const chosenCampaigns = CAMPAIGNS.filter(items => items.profileId === Number.parseInt(chosenProfileId));
+        setChosenCampaigns(chosenCampaigns)
+    }, [chosenProfileId])
 
     return (
         <div className='container'>
-            <h2>Campaigns for ProfileId: </h2>
+            <h2>Campaigns for ProfileId: {chosenProfileId}</h2>
             <table className="table table-striped table-bordered">
                 <thead className='table-dark'>
                     <tr>
@@ -23,7 +29,7 @@ const Campaigns = () => {
                     </tr>
                 </thead>
                 <tbody className="table-group-divider">
-                    {CAMPAIGNS?.map((item, index) =>
+                    {chosenCampaigns?.map((item, index) =>
                         <tr key={nanoid(3)}>
                             <th scope="row">{index + 1}</th>
                             <td>{item.campaignId}</td>
