@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit'
-import { getAllAccountsThunk, getAccountsThunk, getProfilesByAccountIdThank, postAccountThunk, delAccountThunk } from './operationAccounts';
+import { getAllAccountsThunk, getAccountsThunk, getProfilesByAccountIdThank, delAccountThunk } from './operationAccounts';
 
 const accountsInitialState = {
     allAccounts: [],
@@ -20,7 +20,7 @@ const onRejected = (state, { payload }) => {
     state.error = payload;
 };
 
-const arrOfActs = [getAllAccountsThunk, getAccountsThunk, getProfilesByAccountIdThank, postAccountThunk, delAccountThunk];
+const arrOfActs = [getAllAccountsThunk, getAccountsThunk, getProfilesByAccountIdThank, delAccountThunk];
 
 const addStatusToActs = status =>
     arrOfActs.map((el) => el[status]);
@@ -43,11 +43,6 @@ export const accountsSlice = createSlice({
             .addCase(getProfilesByAccountIdThank.fulfilled, (state, { payload }) => {
                 state.isLoading = false;
                 state.selectedAccountById = payload;
-                state.error = null;
-            })
-            .addCase(postAccountThunk.fulfilled, (state, { payload }) => {
-                state.isLoading = false;
-                state.accounts = [...state.accounts, payload]
                 state.error = null;
             })
             .addCase(delAccountThunk.fulfilled, (state, { payload }) => {

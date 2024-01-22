@@ -8,7 +8,6 @@ export const LIMIT = 10;
 const getAllAccounts = async (_, thunkAPI) => {
     try {
         const response = await axios.get('/accounts');
-        console.log('getAccounts response.data', response.data);
         return response.data;
     }
     catch (e) {
@@ -29,17 +28,6 @@ const getProfilesByAccountId = async (accountId, thunkAPI) => {
     try {
         console.log('accountId in thank', accountId);
         const response = await axios.get(`/accounts/${accountId}/profiles`);
-        return response.data;
-    }
-    catch (e) {
-        return thunkAPI.rejectWithValue(e.message);
-    }
-};
-
-const postAccount = async (newAccount, thunkAPI) => {
-    try {
-        const response = await axios.post('/accounts', newAccount);
-        alert(`Contact added successfully`);
         return response.data;
     }
     catch (e) {
@@ -71,11 +59,6 @@ export const getAccountsThunk = createAsyncThunk(
 export const getProfilesByAccountIdThank = createAsyncThunk(
     'accounts/getProfilesByAccountId',
     getProfilesByAccountId
-);
-
-export const postAccountThunk = createAsyncThunk(
-    'accounts/postAccount',
-    postAccount
 );
     
 export const delAccountThunk = createAsyncThunk(
