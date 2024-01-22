@@ -1,12 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectSelectedAccount } from '../redux/accounts/accountsSelector';
+import { selectSelectedAccountById } from '../redux/accounts/accountsSelector';
 import { nanoid } from 'nanoid';
 import { NavLink } from 'react-router-dom';
 import { profileIdSet } from '../redux/chosenIdSlice';
 
 const Profiles = () => {
-    const profilesByAccountId = useSelector(selectSelectedAccount);
+    const profilesByAccountId = useSelector(selectSelectedAccountById);
     // const { accountId } = profilesByAccountId[0];
     const dispatch = useDispatch();
 

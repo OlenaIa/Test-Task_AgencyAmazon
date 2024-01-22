@@ -3,7 +3,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 axios.defaults.baseURL = 'https://65a93932219bfa371868d267.mockapi.io/api';
 
-const getAccounts = async (_, thunkAPI) => {
+export const LIMIT = 10;
+
+const getAllAccounts = async (_, thunkAPI) => {
     try {
         const response = await axios.get('/accounts');
         console.log('getAccounts response.data', response.data);
@@ -14,11 +16,19 @@ const getAccounts = async (_, thunkAPI) => {
     }
 };
 
+const getAccounts = async (page, thunkAPI) => {
+    try {
+        const response = await axios.get(`/accounts?page=${page}&limit=${LIMIT}`);
+        return response.data;
+    }
+    catch (e) {
+        return thunkAPI.rejectWithValue(e.message);
+    }
+};
 const getProfilesByAccountId = async (accountId, thunkAPI) => {
     try {
         console.log('accountId in thank', accountId);
         const response = await axios.get(`/accounts/${accountId}/profiles`);
-        console.log(response.data);
         return response.data;
     }
     catch (e) {
@@ -47,6 +57,11 @@ const delAccount = async (accountId, thunkAPI) => {
         return thunkAPI.rejectWithValue(e.message);
     }
 };
+
+export const getAllAccountsThunk = createAsyncThunk(
+    'accounts/getAllAccounts',
+    getAllAccounts
+);
 
 export const getAccountsThunk = createAsyncThunk(
     'accounts/getAccounts',
