@@ -2,8 +2,9 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const filterInitialState = {
     filterByEmail: "",
-filterByDate: '',
-}    ;
+    filterByDate: '',
+    isCheckedAllAccounts: false,
+};
 
 export const filterSlice = createSlice({
     name: 'filter',
@@ -14,12 +15,11 @@ export const filterSlice = createSlice({
         },
         filterByDateSet(state, {payload}) {
             state.filterByDate = payload;
+        },
+        isCheckedAllAccountsSet(state, {payload}) {
+            state.isCheckedAllAccounts = payload;
         }
     }
 });
 
-export const selectFilterByEmail = state => state.filter.filterByEmail;
-export const selectFilterByDate = state => state.filter.filterByDate;
-
-
-export const { filterByEmailSet,filterByDateSet } = filterSlice.actions;
+export const { filterByEmailSet, filterByDateSet, isCheckedAllAccountsSet } = filterSlice.actions;

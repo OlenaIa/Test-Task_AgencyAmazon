@@ -4,51 +4,33 @@ import { selectAllAccounts, selectAccountsByPage } from '../redux/accounts/accou
 import { useEffect, useState } from 'react';
 import { getAllAccountsThunk, getAccountsThunk, getProfilesByAccountIdThank, LIMIT } from '../redux/accounts/operationAccounts';
 import { NavLink } from 'react-router-dom';
-import { filterByEmailSet, filterByDateSet, selectFilterByEmail, selectFilterByDate } from '../redux/filter/filterSlice';
+import {selectFilterByEmail, selectFilterByDate, selectIsCheckedAllAccounts} from '../redux/filter/filterSelector'
+import { Filters } from 'components/Filters/Filter';
 
 const Accounts = () => {
+    const dispatch = useDispatch();
     const allAccounts = useSelector(selectAllAccounts);
     const accountsByPage = useSelector(selectAccountsByPage);
-    const dispatch = useDispatch();
+    const filterEmail = useSelector(selectFilterByEmail);
+    const filterDate = useSelector(selectFilterByDate);
+    const isCheckedAllAccounts = useSelector(selectIsCheckedAllAccounts);
 
     const [page, setPage] = useState(0)
     const [isLoadMore, setIsLoadMore] = useState(false);
     const [isLoadLess, setIsLoadLess] = useState(true);
-    const [isChecked, setIsChecked] = useState(false)
-
     console.log('page =>', page);
     console.log('isLoadMore =>', isLoadMore);
     console.log('isLoadLess =>', isLoadLess);
 
-    const filterEmail = useSelector(selectFilterByEmail);
-    const filterDate = useSelector(selectFilterByDate);
-console.log('filterDate', filterDate);
-
-    const onChangeFilter = (event) => {
-        console.log(event.currentTarget);
-        const { type, value } = event.currentTarget;
-        switch (type) {
-            case 'email':
-                        dispatch(filterByEmailSet(value))
-
-                break;
-        case 'date':
-                        dispatch(filterByDateSet(value))
-
-                break;
-            default:
-                break;
-        }
-    };
-
-    const checkHandler = () => {
-        setIsChecked(!isChecked)
-        isChecked ? setIsLoadMore(false) : setIsLoadMore(true);
-    };
+    useEffect(() => {
+        console.log('isCheckedAllAccounts in use Effect', isCheckedAllAccounts);
+        isCheckedAllAccounts ? setIsLoadMore(true) : setIsLoadMore(false);
+    }, [isCheckedAllAccounts]);
 
     useEffect(() => {
         dispatch(getAllAccountsThunk())
     }, [dispatch]);
+
     const totalPage = allAccounts.length / LIMIT;
 
     useEffect(() => {
@@ -59,9 +41,11 @@ console.log('filterDate', filterDate);
         if (page > 1) {
             setIsLoadLess(false);
         };
-        if (page === totalPage) {
+        if (page === totalPage ) {
             setIsLoadMore(true);
         };
+
+
         dispatch(getAccountsThunk(page))
     }, [dispatch, page, totalPage]);
 
@@ -96,41 +80,18 @@ console.log('filterDate', filterDate);
     };
 
     const lowerFilter = filterEmail.toLowerCase();
+
     const visibleAccounts = allAccounts.filter(({ email }) =>
         (email.toLowerCase().includes(lowerFilter)));
-        const visibleAccountsByDate = visibleAccounts.filter(({ creationDate }) =>
+    
+    const visibleAccountsByDate = visibleAccounts.filter(({ creationDate }) =>
         (creationDate.includes(filterDate)));
-        console.log('visibleAccountsByDate', visibleAccountsByDate);
     
     return (
         <div className='container'>
             <h2>Accounts</h2>
-            <div className="form-check">
-                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                    checked={isChecked}
-                    onChange={checkHandler}
-                />
-                <label className="form-check-label" for="flexCheckDefault">
-                    All accounts  </label>
-            </div>
-            <div className="mb-3">
-                <label for="exampleFormControlInput1" className="form-label"
-                                
-
-                >Filter by Email</label>
-                <input type="email" className="form-control" id="exampleFormControlInput"
-                    value={filterEmail}
-                    onChange={onChangeFilter}
-                    placeholder="Write Email" />
-            </div>
-            <div className="mb-3">
-                <label for="exampleFormControlInput2" className="form-label"
-                >Sort by Data</label>
-                <input type="date" className="form-control" id="exampleFormControlInput2"
-                    value={filterDate}
-                    onChange={onChangeFilter}
-                    placeholder="Write Date: year-mm-dd" />
-            </div>
+            <Filters/>
+            
             
             <table className="table table-striped table-bordered">
                 <thead className='table-dark'>
@@ -145,24 +106,15 @@ console.log('filterDate', filterDate);
                 </thead>
                 <tbody className="table-group-divider">
                     {(filterEmail.length > 0 && filterEmail.length > 0) ? visibleAccountsByDate?.map((acc, index) =>
-                            <tr key={acc.accountId}>
-                                <th scope="row">{index + 1 + (page * 10 - 10)}</th>
-                                <td onClick={() => onClickAccountId(acc.accountId)}><NavLink className="btn btn-secondary" role="button" to="/profiles">{acc.accountId}</NavLink></td>
-                                <td>{acc.email}</td>
-                                <td>{acc.authToken}</td>
-                                <td>{acc.creationDate}</td>
-                            </tr>) :
-                    filterEmail.length > 0 ?
-                        visibleAccounts?.map((acc, index) =>
-                            <tr key={acc.accountId}>
-                                <th scope="row">{index + 1 + (page * 10 - 10)}</th>
-                                <td onClick={() => onClickAccountId(acc.accountId)}><NavLink className="btn btn-secondary" role="button" to="/profiles">{acc.accountId}</NavLink></td>
-                                <td>{acc.email}</td>
-                                <td>{acc.authToken}</td>
-                                <td>{acc.creationDate}</td>
-                            </tr>) :
-                        isChecked ?
-                            allAccounts?.map((acc, index) =>
+                        <tr key={acc.accountId}>
+                            <th scope="row">{index + 1 + (page * 10 - 10)}</th>
+                            <td onClick={() => onClickAccountId(acc.accountId)}><NavLink className="btn btn-secondary" role="button" to="/profiles">{acc.accountId}</NavLink></td>
+                            <td>{acc.email}</td>
+                            <td>{acc.authToken}</td>
+                            <td>{acc.creationDate}</td>
+                        </tr>) :
+                        filterEmail.length > 0 ?
+                            visibleAccounts?.map((acc, index) =>
                                 <tr key={acc.accountId}>
                                     <th scope="row">{index + 1 + (page * 10 - 10)}</th>
                                     <td onClick={() => onClickAccountId(acc.accountId)}><NavLink className="btn btn-secondary" role="button" to="/profiles">{acc.accountId}</NavLink></td>
@@ -170,14 +122,23 @@ console.log('filterDate', filterDate);
                                     <td>{acc.authToken}</td>
                                     <td>{acc.creationDate}</td>
                                 </tr>) :
-                            accountsByPage?.map((acc, index) =>
-                                <tr key={acc.accountId}>
-                                    <th scope="row">{index + 1 + (page * 10 - 10)}</th>
-                                    <td onClick={() => onClickAccountId(acc.accountId)}><NavLink className="btn btn-secondary" role="button" to="/profiles">{acc.accountId}</NavLink></td>
-                                    <td>{acc.email}</td>
-                                    <td>{acc.authToken}</td>
-                                    <td>{acc.creationDate}</td>
-                                </tr>)}
+                            isCheckedAllAccounts ?
+                                allAccounts?.map((acc, index) =>
+                                    <tr key={acc.accountId}>
+                                        <th scope="row">{index + 1 + (page * 10 - 10)}</th>
+                                        <td onClick={() => onClickAccountId(acc.accountId)}><NavLink className="btn btn-secondary" role="button" to="/profiles">{acc.accountId}</NavLink></td>
+                                        <td>{acc.email}</td>
+                                        <td>{acc.authToken}</td>
+                                        <td>{acc.creationDate}</td>
+                                    </tr>) :
+                                accountsByPage?.map((acc, index) =>
+                                    <tr key={acc.accountId}>
+                                        <th scope="row">{index + 1 + (page * 10 - 10)}</th>
+                                        <td onClick={() => onClickAccountId(acc.accountId)}><NavLink className="btn btn-secondary" role="button" to="/profiles">{acc.accountId}</NavLink></td>
+                                        <td>{acc.email}</td>
+                                        <td>{acc.authToken}</td>
+                                        <td>{acc.creationDate}</td>
+                                    </tr>)}
 
                 </tbody>
             </table>

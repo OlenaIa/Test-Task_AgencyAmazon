@@ -1,0 +1,7 @@
+.navLink {
+    color: green;    
+}
+
+.navLink:active {
+    color: red;
+}

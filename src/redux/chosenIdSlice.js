@@ -13,10 +13,14 @@ export const chosenIdSlice = createSlice({
     reducers: {
         profileIdSet(state, {payload}) {
             state.profileId = payload;
+        },
+        accountIdSet(state, {payload}) {
+            state.accountId = payload;
         }
     }
 });
 
 export const selectProfileId = state => state.chosenId.profileId;
+export const selectAccountId = state => state.chosenId.accountId;
 
-export const { profileIdSet } = chosenIdSlice.actions;
+export const { profileIdSet, accountIdSet } = chosenIdSlice.actions;
