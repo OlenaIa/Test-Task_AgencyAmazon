@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectSelectedAccountById } from '../redux/accounts/accountsSelector';
 import { nanoid } from 'nanoid';
 import { NavLink } from 'react-router-dom';
-import { profileIdSet } from '../redux/chosenIdSlice';
+import { profileIdSet, selectAccountId } from '../redux/chosenIdSlice';
 
 const Profiles = () => {
     const profilesByAccountId = useSelector(selectSelectedAccountById);
-    // const { accountId } = profilesByAccountId[0];
+        const accountId = useSelector(selectAccountId);
+
     const dispatch = useDispatch();
 
     const onClickProfileId = (profileId) => {
@@ -17,7 +18,7 @@ dispatch(profileIdSet(profileId))
 
     return (
         <div className='container'>
-            <h2>Profiles for accountId: {}</h2>
+            <h2>Profiles for accountId: {accountId}</h2>
             <table className="table table-striped table-bordered">
                 <thead className='table-dark'>
                     <tr>
