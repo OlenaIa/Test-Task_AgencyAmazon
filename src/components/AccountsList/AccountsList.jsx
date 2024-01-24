@@ -6,6 +6,7 @@ import { getAccountsThunk, LIMIT } from '../../redux/accounts/operationAccounts'
 import {selectFilterByEmail, selectFilterByDate, selectIsCheckedAllAccounts, selectFilteredAccounts} from '../../redux/filter/filterSelector'
 import { filteredAccountsSet } from '../../redux/filter/filterSlice';
 import { AccountItem } from 'components/AccountItem/AccountItem';
+import { nanoid } from 'nanoid';
 
 export const AccountsList = () => {
     const dispatch = useDispatch();
@@ -16,57 +17,60 @@ export const AccountsList = () => {
     const isCheckedAllAccounts = useSelector(selectIsCheckedAllAccounts);
     const filteredAccounts = useSelector(selectFilteredAccounts);
 
-    const [page, setPage] = useState(0)
+    const [page, setPage] = useState(0);
+    const [totalPage, setTotalPage] = useState(1);
     const [isLoadMore, setIsLoadMore] = useState(false);
     const [isLoadLess, setIsLoadLess] = useState(true);
     console.log('page =>', page);
     console.log('isLoadMore =>', isLoadMore);
     console.log('isLoadLess =>', isLoadLess);
 
-    useEffect(() => {
-        isCheckedAllAccounts ? setIsLoadMore(true) : setIsLoadMore(false);
-    }, [isCheckedAllAccounts]);
-
-    const totalPage = allAccounts.length / LIMIT;
 
     useEffect(() => {
         if (page === 0) {
             setPage(page + 1)
             return;
         };
-        if (page > 1) {
-            setIsLoadLess(false);
-        };
-        if (page === totalPage) {
-            setIsLoadMore(true);
-        };
-
-
+        // if (page >= 0 && page < totalPage) {
+        //     setIsLoadMore(false)
+        // }
+        // if (page <= 1) {
+        //     setIsLoadLess(true)
+        // }
         dispatch(getAccountsThunk(page))
     }, [dispatch, page, totalPage]);
 
+    useEffect(() => {
+        if (filteredAccounts.length === 0) {
+            setTotalPage(allAccounts.length / LIMIT);
+            return;
+        }
+        setTotalPage(filteredAccounts.length / LIMIT);
+    }, [filteredAccounts, allAccounts]);
+
     const onClickLoadMore = () => {
+        setPage(page + 1);
         if (page === totalPage - 1) {
             setIsLoadMore(true);
         };
-        if (page > 1) {
+        if (page >= 1) {
             setIsLoadLess(false);
         };
-        setPage(page + 1)
     };
 
     const onClickLoadLess = () => {
+        setPage(page - 1);
+
         if (page < totalPage + 1) {
             setIsLoadMore(false);
         };
 
-        if (page > 2) {
+        if (page > 1) {
             setIsLoadLess(false);
         };
         if (page === 2) {
             setIsLoadLess(true);
         };
-        setPage(page - 1)
     };
 
     const doFilterAccount = (array, key, filterEmail) => {
@@ -75,16 +79,17 @@ export const AccountsList = () => {
     };
 
     useEffect(() => {
-        if (filterEmail === '' && filterDate === '') {
+        if (filterEmail === '' && filterDate === '' && isCheckedAllAccounts === false) {
             dispatch(filteredAccountsSet([]));
             return;
         };
         setPage(0);
-
-        console.log('filterEmail', filterEmail);
-        console.log('filterDate', filterDate);
-
+        setIsLoadMore(true);
+        setIsLoadLess(true);
         let visibleAccounts = [];
+        if (isCheckedAllAccounts) {
+            visibleAccounts = allAccounts;
+        };
         if (filterEmail !== '' && filterDate !== '') {
             const visibleAccountsByEmail = doFilterAccount(allAccounts, "email", filterEmail);
             visibleAccounts = doFilterAccount(visibleAccountsByEmail, "creationDate", filterDate);
@@ -97,7 +102,7 @@ export const AccountsList = () => {
         };
         dispatch(filteredAccountsSet(visibleAccounts));
 
-    }, [dispatch, allAccounts, filterEmail, filterDate]);
+    }, [dispatch, allAccounts, filterEmail, filterDate, isCheckedAllAccounts]);
 
     return (
         <div className='container'>
@@ -112,16 +117,12 @@ export const AccountsList = () => {
                     </tr>
                 </thead>
                 <tbody className="table-group-divider">
-                    {(filterEmail.length > 0 || filterDate.length > 0) ? filteredAccounts?.map((item, index) =>
-                        <AccountItem item={item} index={index} page={page} />
+                    {(filterEmail.length > 0 || filterDate.length > 0 || isCheckedAllAccounts) ? filteredAccounts?.map((item, index) =>
+                        <AccountItem item={item} index={index} page={page} id={nanoid(3)} />
                     ) :
-                        isCheckedAllAccounts ?
-                            allAccounts?.map((item, index) =>
-                                <AccountItem item={item} index={index} page={page} />
-                            ) :
-                            accountsByPage?.map((item, index) =>
-                                <AccountItem item={item} index={index} page={page} />
-                            )}
+                        accountsByPage?.map((item, index) =>
+                            <AccountItem item={item} index={index} page={page} id={nanoid(3)} />
+                        )}
                 </tbody>
             </table>
             {!isLoadMore && <button type="button" className="btn btn-primary btn-lg" onClick={onClickLoadMore}>Load more</button>}
