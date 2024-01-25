@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { profileIdSet, selectAccountId } from '../redux/chosenIdSlice';
 import { FiltersProfile } from 'components/FiltersProfile/FiltersProfile';
 import { useEffect, useState } from 'react';
+import { doFiltering } from '../services/servicesFunc';
 
 const Profiles = () => {
     const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const Profiles = () => {
     const accountId = useSelector(selectAccountId);
     const [market, setMarket] = useState('');
     const [country, setCountry] = useState({ value: 'all', label: 'All country' });
+    const [visibleProfiles, setVisibleProfiles] = useState([]);
 
     const onClickProfileId = (profileId) => {
         dispatch(profileIdSet(profileId))
@@ -25,13 +27,23 @@ const Profiles = () => {
 
     useEffect(() => {
         if (market === '' && country.value === 'all') {
+            setVisibleProfiles(profilesByAccountId);
             return;
         };
-        const visibleProfilesByAccountId = profilesByAccountId.filter(item =>
-            item.country.toLowerCase().includes(country.value));
-    console.log('visibleProfilesByAccountId', visibleProfilesByAccountId);
-    }, [market, country.value, profilesByAccountId]);
 
+        let profilesByFilters = [];
+        if (country.value !== 'all' && market.length > 0) {
+            const profilesByCountry = doFiltering(profilesByAccountId, 'country', country.value);
+            profilesByFilters = doFiltering(profilesByCountry, 'marketplace', market);
+        };
+        if (country.value !== 'all') {
+            profilesByFilters = doFiltering(profilesByAccountId, 'country', country.value);
+        }
+        if (market.length > 0) {
+            profilesByFilters = doFiltering(profilesByAccountId, 'marketplace', market);
+        }
+        setVisibleProfiles(profilesByFilters);
+    }, [market, country.value, profilesByAccountId]);
 
     return (
         <div className='container'>
@@ -47,7 +59,7 @@ const Profiles = () => {
                     </tr>
                 </thead>
                 <tbody className="table-group-divider">
-                    {profilesByAccountId?.map((item, index) =>
+                    {visibleProfiles?.map((item, index) =>
                         <tr key={nanoid(3)}>
                             <th scope="row">{index + 1}</th>
                             <td onClick={() => onClickProfileId(item.profileId)}>

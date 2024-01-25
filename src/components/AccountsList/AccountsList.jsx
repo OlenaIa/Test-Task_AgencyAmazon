@@ -7,6 +7,7 @@ import {selectFilterByEmail, selectFilterByDate, selectIsCheckedAllAccounts, sel
 import { filteredAccountsSet } from '../../redux/filter/filterSlice';
 import { AccountItem } from 'components/AccountItem/AccountItem';
 import css from './AccountList.module.css'
+import { doFiltering } from '../../services/servicesFunc';
 
 export const AccountsList = () => {
     const dispatch = useDispatch();
@@ -59,11 +60,6 @@ export const AccountsList = () => {
         setPage(page - 1);
     };
 
-    const doFilterAccount = (array, key, filterEmail) => {
-        return array.filter((item) =>
-            (item[key].toLowerCase().includes(filterEmail)));
-    };
-
     useEffect(() => {
         if (filterEmail === '' && filterDate === '' && isCheckedAllAccounts === false) {
             dispatch(filteredAccountsSet([]));
@@ -76,14 +72,14 @@ export const AccountsList = () => {
             visibleAccounts = allAccounts;
         };
         if (filterEmail !== '' && filterDate !== '') {
-            const visibleAccountsByEmail = doFilterAccount(allAccounts, "email", filterEmail);
-            visibleAccounts = doFilterAccount(visibleAccountsByEmail, "creationDate", filterDate);
+            const visibleAccountsByEmail = doFiltering(allAccounts, "email", filterEmail);
+            visibleAccounts = doFiltering(visibleAccountsByEmail, "creationDate", filterDate);
         };
         if (filterEmail !== '' && filterDate === '') {
-            visibleAccounts = doFilterAccount(allAccounts, "email", filterEmail);
+            visibleAccounts = doFiltering(allAccounts, "email", filterEmail);
         };
         if (filterEmail === '' && filterDate !== '') {
-            visibleAccounts = doFilterAccount(allAccounts, "creationDate", filterDate);
+            visibleAccounts = doFiltering(allAccounts, "creationDate", filterDate);
         };
         dispatch(filteredAccountsSet(visibleAccounts));
 
