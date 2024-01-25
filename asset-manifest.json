@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/Test-Task_AgencyAmazon/static/css/main.01d2c186.css",
-    "main.js": "/Test-Task_AgencyAmazon/static/js/main.a0bf092d.js",
+    "main.js": "/Test-Task_AgencyAmazon/static/js/main.6b56ab30.js",
     "static/css/221.23627f2d.chunk.css": "/Test-Task_AgencyAmazon/static/css/221.23627f2d.chunk.css",
-    "static/js/221.0c07f99f.chunk.js": "/Test-Task_AgencyAmazon/static/js/221.0c07f99f.chunk.js",
+    "static/js/221.d2d36669.chunk.js": "/Test-Task_AgencyAmazon/static/js/221.d2d36669.chunk.js",
     "static/css/623.0a59de67.chunk.css": "/Test-Task_AgencyAmazon/static/css/623.0a59de67.chunk.css",
-    "static/js/623.c5d984c3.chunk.js": "/Test-Task_AgencyAmazon/static/js/623.c5d984c3.chunk.js",
+    "static/js/623.f59b666d.chunk.js": "/Test-Task_AgencyAmazon/static/js/623.f59b666d.chunk.js",
     "static/js/601.33d83067.chunk.js": "/Test-Task_AgencyAmazon/static/js/601.33d83067.chunk.js",
     "static/js/479.292ea7c3.chunk.js": "/Test-Task_AgencyAmazon/static/js/479.292ea7c3.chunk.js",
     "index.html": "/Test-Task_AgencyAmazon/index.html",
     "main.01d2c186.css.map": "/Test-Task_AgencyAmazon/static/css/main.01d2c186.css.map",
-    "main.a0bf092d.js.map": "/Test-Task_AgencyAmazon/static/js/main.a0bf092d.js.map",
+    "main.6b56ab30.js.map": "/Test-Task_AgencyAmazon/static/js/main.6b56ab30.js.map",
     "221.23627f2d.chunk.css.map": "/Test-Task_AgencyAmazon/static/css/221.23627f2d.chunk.css.map",
-    "221.0c07f99f.chunk.js.map": "/Test-Task_AgencyAmazon/static/js/221.0c07f99f.chunk.js.map",
+    "221.d2d36669.chunk.js.map": "/Test-Task_AgencyAmazon/static/js/221.d2d36669.chunk.js.map",
     "623.0a59de67.chunk.css.map": "/Test-Task_AgencyAmazon/static/css/623.0a59de67.chunk.css.map",
-    "623.c5d984c3.chunk.js.map": "/Test-Task_AgencyAmazon/static/js/623.c5d984c3.chunk.js.map",
+    "623.f59b666d.chunk.js.map": "/Test-Task_AgencyAmazon/static/js/623.f59b666d.chunk.js.map",
     "601.33d83067.chunk.js.map": "/Test-Task_AgencyAmazon/static/js/601.33d83067.chunk.js.map",
     "479.292ea7c3.chunk.js.map": "/Test-Task_AgencyAmazon/static/js/479.292ea7c3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.01d2c186.css",
-    "static/js/main.a0bf092d.js"
+    "static/js/main.6b56ab30.js"
   ]
 }
