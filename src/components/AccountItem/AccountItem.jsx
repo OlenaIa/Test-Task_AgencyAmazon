@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { getProfilesByAccountIdThank } from '../../redux/accounts/operationAccounts';
 import { accountIdSet } from '../../redux/chosenIdSlice';
 
-export const AccountItem = ({ item, index, page, id }) => {
+export const AccountItem = ({ item, index, page }) => {
     const dispatch = useDispatch();
 
     const onClickAccountId = (accountId) => {
@@ -13,11 +13,11 @@ export const AccountItem = ({ item, index, page, id }) => {
     };
 
     return (
-        <tr key={id}>
+        <tr key={item.accountId}>
             <th scope="row">{index + 1 + (page * 10 - 10)}</th>
             <td onClick={() => onClickAccountId(item.accountId)}>
                 <NavLink className="btn btn-secondary" role="button" to="/profiles">
-                    {item.accountId}
+                    Click id {item.accountId} 
                 </NavLink>
             </td>
             <td>{item.email}</td>
