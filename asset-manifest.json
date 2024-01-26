@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Test-Task_AgencyAmazon/static/css/main.01d2c186.css",
-    "main.js": "/Test-Task_AgencyAmazon/static/js/main.673300ee.js",
+    "main.js": "/Test-Task_AgencyAmazon/static/js/main.462518c6.js",
     "static/css/221.23627f2d.chunk.css": "/Test-Task_AgencyAmazon/static/css/221.23627f2d.chunk.css",
     "static/js/221.d2d36669.chunk.js": "/Test-Task_AgencyAmazon/static/js/221.d2d36669.chunk.js",
     "static/css/623.c192977b.chunk.css": "/Test-Task_AgencyAmazon/static/css/623.c192977b.chunk.css",
@@ -11,7 +11,7 @@
     "static/js/479.292ea7c3.chunk.js": "/Test-Task_AgencyAmazon/static/js/479.292ea7c3.chunk.js",
     "index.html": "/Test-Task_AgencyAmazon/index.html",
     "main.01d2c186.css.map": "/Test-Task_AgencyAmazon/static/css/main.01d2c186.css.map",
-    "main.673300ee.js.map": "/Test-Task_AgencyAmazon/static/js/main.673300ee.js.map",
+    "main.462518c6.js.map": "/Test-Task_AgencyAmazon/static/js/main.462518c6.js.map",
     "221.23627f2d.chunk.css.map": "/Test-Task_AgencyAmazon/static/css/221.23627f2d.chunk.css.map",
     "221.d2d36669.chunk.js.map": "/Test-Task_AgencyAmazon/static/js/221.d2d36669.chunk.js.map",
     "623.c192977b.chunk.css.map": "/Test-Task_AgencyAmazon/static/css/623.c192977b.chunk.css.map",
@@ -22,6 +22,6 @@
   },
   "entrypoints": [
     "static/css/main.01d2c186.css",
-    "static/js/main.673300ee.js"
+    "static/js/main.462518c6.js"
   ]
 }
