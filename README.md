@@ -2,6 +2,11 @@
 
 Стек технологій: React
 
+## Video presentation
+
+[Відео-презентація до роботи]
+https://www.loom.com/share/e0cb9474825b46b58ed4c26e62939a6c
+
 ## Task
 
 Створити веб-застосунок із такою ієрархічною структурою сторінок(таблиць):
@@ -19,15 +24,3 @@ Table [Accounts] { "accountId", "email", "authToken", "creationDate" } Table
 задати константами в коді. (або використати будь-які методи імітування виводу
 даних із бекенду) Будь-які проявлені ініціативи по додавання функціоналу в
 застосунок - вітаються.
-
-## Подготовка к работе
-
-## Деплой
-
-![GitHub Pages settings](./assets/repo-settings.png)
-
-### Статус деплоя
-
-![Deployment status](./assets/deploy-status.png)
-
-### Живая страница
