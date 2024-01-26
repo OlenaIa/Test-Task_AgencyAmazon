@@ -26,7 +26,6 @@ const getAccounts = async (page, thunkAPI) => {
 };
 const getProfilesByAccountId = async (accountId, thunkAPI) => {
     try {
-        console.log('accountId in thank', accountId);
         const response = await axios.get(`/accounts/${accountId}/profiles`);
         return response.data;
     }

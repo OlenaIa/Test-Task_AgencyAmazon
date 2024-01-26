@@ -7,7 +7,6 @@ import { selectAccountId, selectProfileId } from '../../redux/chosenIdSlice';
 export const Header = () => {
     const accountId = useSelector(selectAccountId);
     const profileId = useSelector(selectProfileId);
-    console.log('accountId', accountId, 'profileId', profileId);
 
     return (
         <div className='container'>
